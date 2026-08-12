@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Jaana ❤️</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#050307;color:white;font-family:Georgia,serif;overflow:hidden}
+.slide{display:none;min-height:100vh;padding:35px 18px 90px;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle,#24101f,#050307 65%)}
+.slide.on{display:flex}.box{width:min(540px,100%)}h1{font-size:70px;color:#ff70ad;text-shadow:0 0 25px #ff2d88;font-style:italic}h2{font-size:36px}.pink{color:#ff70ad}.btn{background:#e83280;color:white;border:1px solid #ff72b2;border-radius:30px;padding:14px 25px;font-size:18px;box-shadow:0 0 25px #ff2d8870}
+.photo{width:min(390px,90vw);padding:9px;background:white;transform:rotate(-1deg);box-shadow:0 15px 40px #000}.photo img{width:100%;display:block}.caption{font-size:38px;color:#ff70ad;font-style:italic;margin-top:18px}
+.cake{font-size:170px;filter:drop-shadow(0 0 20px #ff6);margin:15px}.balloons{display:grid;grid-template-columns:repeat(2,1fr);gap:25px;max-width:430px;margin:30px auto}.balloon{height:145px;border-radius:50%;background:#ff4f9a;display:grid;place-items:center;padding:20px;font-size:19px;box-shadow:0 0 25px #ff4f9a66;cursor:pointer}.balloon.dark{background:#171017}.pop{animation:pop .35s forwards}@keyframes pop{to{transform:scale(1.8);opacity:0}}
+video{width:100%;border-radius:15px;background:#000}.envelope{position:relative;background:#170b14;border:1px solid #ff4f9a;border-radius:8px;padding:20px;box-shadow:0 0 30px #ff2d8850}.letter{background:#fff4ed;color:#29161d;padding:25px;text-align:left;font-size:20px;line-height:1.4}.cats{font-size:65px;margin-top:15px;animation:bob 1s infinite alternate}@keyframes bob{to{transform:translateY(-7px)}}
+.music{position:fixed;bottom:12px;left:12px;right:12px;background:#0e080d;border:1px solid #49263b;border-radius:30px;padding:10px;z-index:10;display:flex;gap:8px;align-items:center}.music span{flex:1}.music button{border:1px solid #ff4f9a;background:#160b13;color:white;border-radius:20px;padding:8px 12px}.dots{position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:20;color:#ff70ad}
+</style></head><body>
+<div class="dots" id="dots">● ○ ○ ○ ○ ○</div>
+
+<section class="slide on"><div class="box"><p>Shhh… 🤫</p><h1>Hey Jaana♡</h1><p>I made something special for you ❤️</p><button class="btn" onclick="go(1)">OPEN YOUR SURPRISE 🎁</button></div></section>
+
+<section class="slide"><div class="box"><h2>Make a wish, Jaana… ❤️</h2><div class="cake" id="cake">🎂</div><button class="btn" id="blow">🎤 BLOW THE CANDLES</button><p>Allow microphone access, then blow gently.</p></div></section>
+
+<section class="slide"><div class="box"><div class="photo"><img src="assets/nuzhat-photo.jpg"></div><div class="caption">I Love you so much ❤️</div></div></section>
+
+<section class="slide"><div class="box"><h2>Pop the balloons ❤️</h2><div class="balloons"><div class="balloon" onclick="pop(this)">You mean a lot to me ❤️</div><div class="balloon dark" onclick="pop(this)">Your smile is my favourite ❤️</div><div class="balloon" onclick="pop(this)">Thank you for always being you ❤️</div><div class="balloon dark" onclick="pop(this)">You make everything better ❤️</div></div><p id="hint">Tap every balloon 🎈</p></div></section>
+
+<section class="slide"><div class="box"><video controls playsinline><source src="assets/jaana-video.mp4" type="video/mp4"></video></div></section>
+
+<section class="slide"><div class="box"><h2>For you, Jaana ❤️</h2><div class="envelope"><div class="letter">A very happy birthday to you Jaana 💋 🫂<br><br>I love you so much ❤️ Thank you for coming in my life. May you get all the happiness. Stay blessed, healthy and always be mine 💗 😙<br><br><i>Forever yours,<br>Nuzhat ❤️</i></div></div><div class="cats">🐱 💋 😽</div></div></section>
+
+<div class="music"><span>♫ Gehraiyaan</span><input id="audio" type="file" accept="audio/*" hidden><button onclick="document.getElementById('audio').click()">Add song</button><button id="play">▶</button></div><audio id="bg" loop></audio>
+<script>
+let n=0,popped=0,slides=document.querySelectorAll('.slide');
+function go(i){slides[n].classList.remove('on');n=(n+i+slides.length)%slides.length;slides[n].classList.add('on');document.getElementById('dots').textContent=['● ○ ○ ○ ○ ○','○ ● ○ ○ ○ ○','○ ○ ● ○ ○ ○','○ ○ ○ ● ○ ○','○ ○ ○ ○ ● ○','○ ○ ○ ○ ○ ●'][n]}
+function pop(x){if(x.classList.contains('pop'))return;x.classList.add('pop');popped++;if(popped===4)setTimeout(()=>go(1),500)}
+document.getElementById('blow').onclick=async()=>{try{let s=await navigator.mediaDevices.getUserMedia({audio:true}),c=new AudioContext(),a=c.createAnalyser(),src=c.createMediaStreamSource(s);src.connect(a);let d=new Uint8Array(a.fftSize);function f(){a.getByteTimeDomainData(d);let r=Math.sqrt(d.reduce((q,v)=>q+((v-128)/128)**2,0)/d.length);if(r>.1){s.getTracks().forEach(t=>t.stop());document.getElementById('cake').textContent='🎂✨';setTimeout(()=>go(1),900)}else requestAnimationFrame(f)}f()}catch(e){alert('Please allow microphone access to blow the candles.')}};
+const audio=document.getElementById('audio'),bg=document.getElementById('bg'),play=document.getElementById('play');audio.onchange=()=>{bg.src=URL.createObjectURL(audio.files[0]);bg.play();play.textContent='Ⅱ'};play.onclick=()=>{if(!bg.src)return audio.click();bg.paused?(bg.play(),play.textContent='Ⅱ'):(bg.pause(),play.textContent='▶')};
+</script></body></html>
